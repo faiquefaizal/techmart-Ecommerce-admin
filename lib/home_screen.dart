@@ -1,6 +1,7 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:techmart_admin/screens/brand_screen.dart';
 import 'package:techmart_admin/screens/catagory_screen.dart';
 import 'package:techmart_admin/screens/dashboard_screen.dart';
 import 'package:techmart_admin/screens/order_screen.dart';
@@ -73,6 +74,15 @@ class _MyHomePageState extends State<HomePage> {
                   pageController.jumpToPage(index); // navigates to page
                 },
 
+                icon: const Icon(Icons.shopping_bag_rounded),
+              ),
+              SideMenuItem(
+                title: 'Brands',
+                onTap: (index, _) {
+                  sideMenu.changePage(index); // updates selected menu
+                  pageController.jumpToPage(index); // navigates to page
+                },
+
                 icon: const Icon(Icons.category),
               ),
               SideMenuItem(
@@ -95,6 +105,7 @@ class _MyHomePageState extends State<HomePage> {
                 UsersPage(),
                 SellersPage(),
                 CatagoryScreen(),
+                BrandScreen(),
                 OrdersPage(),
               ],
             ),

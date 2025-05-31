@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:nativewrappers/_internal/vm/lib/typed_data_patch.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,12 +6,12 @@ import 'package:techmart_admin/core/funtions/image_funtion.dart';
 import 'package:techmart_admin/core/widgets/custem_textfield.dart';
 import 'package:techmart_admin/providers/pick_image.dart';
 
-custemAddDialog(
-  BuildContext context,
-
-  TextEditingController controller,
-  void Function() onpressed,
-) {
+custemAddDialog({
+  required BuildContext context,
+  String? oldimage,
+  required TextEditingController controller,
+  required void Function() onpressed,
+}) {
   return showDialog(
     context: context,
     builder: (context) {
@@ -50,6 +49,8 @@ custemAddDialog(
                             imageProvider.pickedImage!,
                             fit: BoxFit.cover,
                           )
+                          : oldimage != null
+                          ? Image.network(oldimage, fit: BoxFit.cover)
                           : Center(child: Text("Click here to add image")),
                 ),
               ),

@@ -9,46 +9,55 @@ import 'package:techmart_admin/models/category_model.dart';
 
 class CategoryService extends ChangeNotifier {
   final catagoryCollection = FirebaseFirestore.instance.collection("Catagory");
+  static const cloudName = "dmkamtddy";
+  static const clouddPresent = "flutter_uploads";
+  static const cloudApiKey = "956275761217399";
+
+  static const cloudApiSecretKey = "qHxukWJjglp4g3MpP1tPCgf2m0Q";
 
   Future<void> addCatagory(String name, Uint8List image) async {
-    String? imageurl = await sendImageToCloidinary(image);
-    if (imageurl != null) {
-      final docref = catagoryCollection.doc();
-      final catagoryModel = CategoryModel(
-        categoryuid: docref.id,
-        imageurl: imageurl,
-        name: name,
-      );
-      await catagoryCollection
-          .doc(catagoryModel.categoryuid)
-          .set(catagoryModel.toMap());
-    } else {
-      throw "Image not avialabe";
+    try {
+      String? imageurl = await sendImageToCloidinary(image);
+      if (imageurl != null) {
+        final docref = catagoryCollection.doc();
+        final catagoryModel = CategoryModel(
+          categoryuid: docref.id,
+          imageurl: imageurl,
+          name: name,
+        );
+        await catagoryCollection
+            .doc(catagoryModel.categoryuid)
+            .set(catagoryModel.toMap());
+      } else {
+        throw "Image not avialabe";
+      }
+    } catch (e) {
+      log(e.toString());
     }
   }
 
-  // fetchCatagory() async {
-  //   final catagories = await catagoryCollection.get();
-
-  //   catagoryList.clear();
-  //   catagoryList.addAll(
-  //     catagories.docs
-  //         .map((value) => CategoryModel.fromMap(value.data()))
-  //         .toList(),
-  //   );
-  //   notifyListeners();
-  // }
-
-  // Future<void> addCatagory(CategoryModel catagory) async {
-  //   await catagoryCollection.doc(catagory.categoryuid).set(catagory.toMap());
-  // }
-
-  Future<void> editCatagory(CategoryModel catagory) async {
-    await catagoryCollection.doc(catagory.categoryuid).update(catagory.toMap());
+  Future<void> editCatagory(CategoryModel catagory, String? oldImage) async {
+    try {
+      if (oldImage != null && oldImage != catagory.imageurl) {
+        await deleteImageFromCloudinary(oldImage);
+      }
+      await catagoryCollection
+          .doc(catagory.categoryuid)
+          .update(catagory.toMap());
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
   }
 
   Future<void> deleteCatagory(CategoryModel catagory) async {
-    await catagoryCollection.doc(catagory.categoryuid).delete();
+    try {
+      await deleteImageFromCloudinary(catagory.categoryuid);
+      await catagoryCollection.doc(catagory.categoryuid).delete();
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
   }
 
   Stream<List<CategoryModel>> fetchCatagories() {
@@ -61,8 +70,6 @@ class CategoryService extends ChangeNotifier {
   }
 
   Future<String?> sendImageToCloidinary(Uint8List image) async {
-    const cloudName = "dmkamtddy";
-    const clouddPresent = "flutter_uploads";
     try {
       final url = Uri.parse(
         "https://api.cloudinary.com/v1_1/$cloudName/image/upload",
@@ -86,6 +93,40 @@ class CategoryService extends ChangeNotifier {
       }
     } catch (e) {
       log(e.toString());
+    }
+  }
+
+  Future<void> deleteImageFromCloudinary(String imageUrl) async {
+    try {
+      // Extract the public_id from the image URL
+      final uri = Uri.parse(imageUrl);
+      final pathSegments = uri.pathSegments;
+      final publicId =
+          pathSegments
+              .sublist(pathSegments.indexOf(clouddPresent))
+              .join('/')
+              .split('.')
+              .first;
+
+      final url = Uri.parse(
+        "https://api.cloudinary.com/v1_1/$cloudName/resources/image/upload",
+      );
+      final response = await http.delete(
+        url,
+        headers: {
+          "Authorization":
+              "Basic ${base64Encode(utf8.encode('$cloudApiKey:$cloudApiSecretKey'))}",
+        },
+        body: jsonEncode({"public_id": publicId}),
+      );
+
+      if (response.statusCode == 200) {
+        log("Image deleted from Cloudinary: $publicId");
+      } else {
+        throw "Failed to delete image from Cloudinary: ${response.statusCode}";
+      }
+    } catch (e) {
+      log("Error deleting image from Cloudinary: $e");
     }
   }
 }

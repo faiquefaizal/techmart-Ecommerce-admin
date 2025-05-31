@@ -5,6 +5,7 @@ import 'package:techmart_admin/firebase_options.dart';
 import 'package:techmart_admin/home_screen.dart';
 import 'package:techmart_admin/models/category_model.dart';
 import 'package:techmart_admin/providers/pick_image.dart';
+import 'package:techmart_admin/services/brand_service.dart';
 import 'package:techmart_admin/services/catagory_service.dart';
 
 void main() async {
@@ -20,8 +21,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<CategoryService>(create: (_) => CategoryService()),
-        Provider<ImageProviderModel>(create: (_) => ImageProviderModel()),
+        ChangeNotifierProvider<CategoryService>(
+          create: (_) => CategoryService(),
+        ),
+        ChangeNotifierProvider<ImageProviderModel>(
+          create: (_) => ImageProviderModel(),
+        ),
+        ChangeNotifierProvider<BrandService>(create: (_) => BrandService()),
       ],
 
       child: MaterialApp(
