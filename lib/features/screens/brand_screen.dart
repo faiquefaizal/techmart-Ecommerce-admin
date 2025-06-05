@@ -212,14 +212,11 @@ class BrandScreen extends StatelessWidget {
                                           width: 50,
                                           height: 50,
                                           errorBuilder:
-                                              (
-                                                context,
-                                                error,
-                                                stackTrace,
-                                              ) => const Icon(
-                                                Icons.broken_image,
-                                                size: 50,
-                                              ), // Fallback for broken images
+                                              (context, error, stackTrace) =>
+                                                  const Icon(
+                                                    Icons.broken_image,
+                                                    size: 50,
+                                                  ),
                                         ),
                                       ),
                                       DataCell(Text(brand.name)),

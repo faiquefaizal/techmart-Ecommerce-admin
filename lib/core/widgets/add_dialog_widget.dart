@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:techmart_admin/core/funtions/image_funtion.dart';
 import 'package:techmart_admin/core/widgets/custem_textfield.dart';
+import 'package:techmart_admin/providers/catagory_varient_provider.dart';
 import 'package:techmart_admin/providers/pick_image.dart';
 
 custemAddDialog({
@@ -11,6 +12,8 @@ custemAddDialog({
   String? oldimage,
   required TextEditingController controller,
   required void Function() onpressed,
+  bool varient = false,
+  VoidCallback? varientOption,
 }) {
   return showDialog(
     context: context,
@@ -62,6 +65,37 @@ custemAddDialog({
                   controller: controller,
                 ),
               ),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text("Add Category varient"),
+              ),
+              if (varient)
+                Column(
+                  children: [
+                    Consumer<CatagoryVarientProvider>(
+                      builder: (context, varientList, child) {
+                        return ListView.builder(
+                          itemCount: varientList.ctagoryVarientList.length,
+                          itemBuilder: (context, index) {
+                            final data = varientList.ctagoryVarientList[index];
+
+                            return Row(
+                              children: [
+                                Text(data.name),
+                                Text(data.options.join(",")),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ElevatedButton.icon(
+                onPressed: varientOption,
+                label: Text("Add varients"),
+              ),
+
               ElevatedButton(onPressed: onpressed, child: Text("Add Catagory")),
             ],
           ),

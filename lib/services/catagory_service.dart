@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:techmart_admin/models/catagory_varient.dart';
 import 'package:techmart_admin/models/category_model.dart';
 
 class CategoryService extends ChangeNotifier {
@@ -15,12 +16,17 @@ class CategoryService extends ChangeNotifier {
 
   static const cloudApiSecretKey = "qHxukWJjglp4g3MpP1tPCgf2m0Q";
 
-  Future<void> addCatagory(String name, Uint8List image) async {
+  Future<void> addCatagory(
+    String name,
+    Uint8List image,
+    List<CatagoryVarient> varients,
+  ) async {
     try {
       String? imageurl = await sendImageToCloidinary(image);
       if (imageurl != null) {
         final docref = catagoryCollection.doc();
         final catagoryModel = CategoryModel(
+          varientOptions: varients,
           categoryuid: docref.id,
           imageurl: imageurl,
           name: name,

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:techmart_admin/firebase_options.dart';
 import 'package:techmart_admin/home_screen.dart';
 import 'package:techmart_admin/models/category_model.dart';
+import 'package:techmart_admin/providers/catagory_varient_provider.dart';
 import 'package:techmart_admin/providers/pick_image.dart';
 import 'package:techmart_admin/services/brand_service.dart';
 import 'package:techmart_admin/services/catagory_service.dart';
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
           create: (_) => ImageProviderModel(),
         ),
         ChangeNotifierProvider<BrandService>(create: (_) => BrandService()),
+        ChangeNotifierProvider<CatagoryVarientProvider>(
+          create: (_) => CatagoryVarientProvider(),
+        ),
       ],
 
       child: MaterialApp(

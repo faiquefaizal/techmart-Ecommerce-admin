@@ -1,15 +1,24 @@
+import 'package:techmart_admin/models/catagory_varient.dart';
+
 class CategoryModel {
   String categoryuid;
   String name;
   String imageurl;
+  List<CatagoryVarient> varientOptions;
   CategoryModel({
     required this.categoryuid,
     required this.imageurl,
     required this.name,
+    required this.varientOptions,
   });
 
   Map<String, dynamic> toMap() {
-    return {"CatagoryUid": categoryuid, "Name": name, "imageurl": imageurl};
+    return {
+      "CatagoryUid": categoryuid,
+      "Name": name,
+      "imageurl": imageurl,
+      "varientOptions": varientOptions.map((e) => e.toMap()).toList(),
+    };
   }
 
   factory CategoryModel.fromMap(Map<String, dynamic> map) {
@@ -17,6 +26,10 @@ class CategoryModel {
       categoryuid: map["CatagoryUid"],
       imageurl: map["imageurl"],
       name: map["Name"],
+      varientOptions:
+          (map["varientOptions"] as List)
+              .map((e) => CatagoryVarient.fromMap(map))
+              .toList(),
     );
   }
 }
