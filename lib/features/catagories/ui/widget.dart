@@ -1,0 +1,60 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:techmart_admin/models/catagory_varient.dart';
+import 'package:techmart_admin/providers/catagory_varient_provider.dart';
+
+Future<void> showEditVariantDialog(
+  BuildContext context,
+  String name,
+  String options,
+  int index,
+) async {
+  final nameController = TextEditingController(text: name);
+  final optionController = TextEditingController(text: options);
+  await showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text("Add Variant"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: nameController,
+              decoration: InputDecoration(labelText: "Variant name"),
+            ),
+            TextField(
+              controller: optionController,
+              decoration: InputDecoration(labelText: "Options"),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              final name = nameController.text.trim();
+              final options =
+                  optionController.text
+                      .trim()
+                      .split(",")
+                      .map((e) => e.trim())
+                      .toList();
+              if (name.isNotEmpty && options.isNotEmpty) {
+                final newVariant = CatagoryVarient(
+                  name: name,
+                  options: options,
+                );
+                context.read<CatagoryVarientProvider>().updateCatagoryVarient(
+                  index,
+                  newVariant,
+                );
+              }
+              Navigator.pop(context);
+            },
+            child: Text("Add"),
+          ),
+        ],
+      );
+    },
+  );
+}

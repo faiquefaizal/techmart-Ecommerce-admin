@@ -27,8 +27,8 @@ class CategoryModel {
       imageurl: map["imageurl"],
       name: map["Name"],
       varientOptions:
-          (map["varientOptions"] as List)
-              .map((e) => CatagoryVarient.fromMap(map))
+          (map["varientOptions"] as List<dynamic>)
+              .map((e) => CatagoryVarient.fromMap(e as Map<String, dynamic>))
               .toList(),
     );
   }
