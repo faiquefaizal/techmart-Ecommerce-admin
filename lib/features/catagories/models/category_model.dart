@@ -1,4 +1,4 @@
-import 'package:techmart_admin/models/catagory_varient.dart';
+import 'package:techmart_admin/features/catagories/models/catagory_varient.dart';
 
 class CategoryModel {
   String categoryuid;

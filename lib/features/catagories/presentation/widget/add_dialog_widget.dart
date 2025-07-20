@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:techmart_admin/core/funtions/image_funtion.dart';
 import 'package:techmart_admin/core/widgets/custem_textfield.dart';
-import 'package:techmart_admin/features/catagories/ui/widget.dart';
-import 'package:techmart_admin/providers/catagory_varient_provider.dart';
+import 'package:techmart_admin/features/catagories/presentation/widget/widget.dart';
+import 'package:techmart_admin/features/catagories/providers/catagory_varient_provider.dart';
 import 'package:techmart_admin/providers/pick_image.dart';
 
 custemAddDialog({

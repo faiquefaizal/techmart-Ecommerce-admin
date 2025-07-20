@@ -2,15 +2,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:techmart_admin/core/widgets/add_dialog_widget.dart';
-import 'package:techmart_admin/core/widgets/confirmation_dialog.dart';
-import 'package:techmart_admin/models/category_model.dart';
-import 'package:techmart_admin/providers/catagory_varient_provider.dart';
+import 'package:techmart_admin/features/catagories/presentation/widget/add_dialog_widget.dart';
+import 'package:techmart_admin/features/catagories/presentation/widget/confirmation_dialog.dart';
+import 'package:techmart_admin/features/catagories/models/category_model.dart';
+import 'package:techmart_admin/features/catagories/providers/catagory_varient_provider.dart';
 import 'package:techmart_admin/providers/pick_image.dart';
-import 'package:techmart_admin/services/catagory_service.dart';
+import 'package:techmart_admin/features/catagories/service/catagory_service.dart';
 
 class BodyWidget extends StatelessWidget {
-  TextEditingController ctagorynameController = TextEditingController();
+  final TextEditingController ctagorynameController;
   BodyWidget({super.key, required this.ctagorynameController});
 
   @override
@@ -67,10 +67,7 @@ class BodyWidget extends StatelessWidget {
                                 children: [
                                   TextButton(
                                     onPressed: () {
-                                      ctagorynameController =
-                                          TextEditingController(
-                                            text: value.name,
-                                          );
+                                      ctagorynameController.text = value.name;
 
                                       custemAddDialog(
                                         context: context,

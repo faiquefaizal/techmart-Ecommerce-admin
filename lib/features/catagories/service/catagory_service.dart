@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:techmart_admin/models/catagory_varient.dart';
-import 'package:techmart_admin/models/category_model.dart';
+import 'package:techmart_admin/features/catagories/models/catagory_varient.dart';
+import 'package:techmart_admin/features/catagories/models/category_model.dart';
 
 class CategoryService extends ChangeNotifier {
   final catagoryCollection = FirebaseFirestore.instance.collection("Catagory");
@@ -15,6 +15,11 @@ class CategoryService extends ChangeNotifier {
   static const cloudApiKey = "956275761217399";
 
   static const cloudApiSecretKey = "qHxukWJjglp4g3MpP1tPCgf2m0Q";
+  Future<bool> doesCategoryExist(String name) async {
+    final snapshot =
+        await catagoryCollection.where('name', isEqualTo: name).limit(1).get();
+    return snapshot.docs.isNotEmpty;
+  }
 
   Future<void> addCatagory(
     String name,

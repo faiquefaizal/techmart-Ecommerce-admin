@@ -1,13 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:techmart_admin/features/sellers/service/seller_service.dart';
 import 'package:techmart_admin/firebase_options.dart';
 import 'package:techmart_admin/home_screen.dart';
-import 'package:techmart_admin/models/category_model.dart';
-import 'package:techmart_admin/providers/catagory_varient_provider.dart';
+import 'package:techmart_admin/features/catagories/models/category_model.dart';
+import 'package:techmart_admin/features/catagories/providers/catagory_varient_provider.dart';
 import 'package:techmart_admin/providers/pick_image.dart';
-import 'package:techmart_admin/services/brand_service.dart';
-import 'package:techmart_admin/services/catagory_service.dart';
+import 'package:techmart_admin/features/brands/services/brand_service.dart';
+import 'package:techmart_admin/features/catagories/service/catagory_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<SellerService>(create: (_) => SellerService()),
         ChangeNotifierProvider<CategoryService>(
           create: (_) => CategoryService(),
         ),

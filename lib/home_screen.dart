@@ -1,12 +1,13 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:techmart_admin/features/catagories/catagory_screen.dart';
+import 'package:techmart_admin/features/catagories/presentation/screens/catagory_screen.dart';
 import 'package:techmart_admin/features/screens/brand_screen.dart';
 import 'package:techmart_admin/features/screens/dashboard_screen.dart';
 import 'package:techmart_admin/features/screens/order_screen.dart';
-import 'package:techmart_admin/features/screens/sellers.dart';
+
 import 'package:techmart_admin/features/screens/users.dart';
+import 'package:techmart_admin/features/sellers/presentation/screens/sellers_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

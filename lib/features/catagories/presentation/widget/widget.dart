@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:techmart_admin/models/catagory_varient.dart';
-import 'package:techmart_admin/providers/catagory_varient_provider.dart';
+import 'package:techmart_admin/features/catagories/models/catagory_varient.dart';
+import 'package:techmart_admin/features/catagories/providers/catagory_varient_provider.dart';
 
 Future<void> showEditVariantDialog(
   BuildContext context,
