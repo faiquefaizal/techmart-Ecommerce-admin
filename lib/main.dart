@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:techmart_admin/features/authentication/presentation/widget/screens/login_page.dart';
+import 'package:techmart_admin/features/banner/provider/current_state.dart';
+import 'package:techmart_admin/features/coupons/service/coupon_service.dart';
 import 'package:techmart_admin/features/sellers/service/seller_service.dart';
 import 'package:techmart_admin/firebase_options.dart';
 import 'package:techmart_admin/home_screen.dart';
@@ -34,10 +37,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<CatagoryVarientProvider>(
           create: (_) => CatagoryVarientProvider(),
         ),
+        ChangeNotifierProvider(create: (_) => CouponService()),
+        ChangeNotifierProvider(create: (_) => BannerService()),
       ],
 
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: false),
+        // home: LoginPage(),
         home: HomePage(),
         debugShowCheckedModeBanner: false,
       ),

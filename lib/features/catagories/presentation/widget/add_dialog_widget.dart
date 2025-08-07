@@ -47,7 +47,7 @@ custemAddDialog({
                     ),
                     height: 250,
                     width: 250,
-                    // color: Colors.grey,
+
                     child:
                         imageProvider.pickedImage != null
                             ? Image.memory(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-custemSnakbar(BuildContext context, String message, Color color) {
+void custemSnakbar(BuildContext context, String message, Color color) {
   final snakbar = SnackBar(
     content: Text(message),
     backgroundColor: color,

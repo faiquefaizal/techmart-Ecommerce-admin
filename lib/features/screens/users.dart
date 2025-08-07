@@ -17,9 +17,7 @@ class UsersPage extends StatelessWidget {
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(child: Text('No users found.'));
           }
-
           final users = snapshot.data!.docs;
-
           return SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: SingleChildScrollView(
@@ -28,13 +26,18 @@ class UsersPage extends StatelessWidget {
                 columns: const [
                   DataColumn(label: Text('Name')),
                   DataColumn(label: Text('Email')),
-                  DataColumn(label: Text("Phone Number")),
+                  DataColumn(
+                    label: Text(
+                      "Phone Number",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 ],
                 rows:
                     users.map((user) {
                       final name = user['name'] ?? 'No Name';
                       final email = user['email'] ?? 'No Email';
-                      final phone = user['email'] ?? 'NO phone';
+                      final phone = user['phone'] ?? 'NO phone';
 
                       return DataRow(
                         cells: [

@@ -2,13 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustemTextFIeld extends StatefulWidget {
+  final TextInputType textType;
   final String label;
   final String hintText;
   final TextEditingController controller;
   final bool password;
   final bool readOnly;
+  final bool enabled;
   String? Function(String?)? validator;
+  VoidCallback? ontap;
   CustemTextFIeld({
+    super.key,
+    this.enabled = true,
+    this.ontap,
+    this.textType = TextInputType.text,
     required this.label,
     required this.hintText,
     required this.controller,
@@ -39,11 +46,14 @@ class _CustemTextFIeldState extends State<CustemTextFIeld> {
         Text(widget.label, style: const TextStyle(fontWeight: FontWeight.w700)),
         const SizedBox(height: 8),
         TextFormField(
+          enabled: widget.enabled,
+          keyboardType: widget.textType,
           validator: widget.validator,
           readOnly: widget.readOnly,
           controller: widget.controller,
           obscureText: _obscureText,
 
+          onTap: widget.ontap,
           decoration: InputDecoration(
             hintText: widget.hintText,
             filled: true,

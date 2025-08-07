@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:provider/provider.dart';
 import 'package:techmart_admin/features/sellers/service/seller_service.dart';
 
 class SellersTable extends StatelessWidget {
@@ -8,7 +8,7 @@ class SellersTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sellerService = SellerService();
+    final sellerService = context.read<SellerService>();
 
     return StreamBuilder<QuerySnapshot>(
       stream: sellerService.fetchSellers(),

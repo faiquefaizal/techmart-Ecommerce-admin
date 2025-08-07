@@ -1,6 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'dart:developer';
 
-generateFirebaseId() {
-  return FirebaseFirestore.instance.collection("sample").id;
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+String generateFirebaseId() {
+  final id = FirebaseFirestore.instance.collection("kjl").doc();
+  log(id.id ?? "nogentrated");
+  return id.id;
 }
