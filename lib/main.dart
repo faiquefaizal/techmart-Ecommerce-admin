@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:techmart_admin/features/authentication/presentation/widget/screens/login_page.dart';
 import 'package:techmart_admin/features/banner/provider/current_state.dart';
 import 'package:techmart_admin/features/coupons/service/coupon_service.dart';
+import 'package:techmart_admin/features/orders/provider/order_provider.dart';
 import 'package:techmart_admin/features/sellers/service/seller_service.dart';
 import 'package:techmart_admin/firebase_options.dart';
 import 'package:techmart_admin/home_screen.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<OrderProvider>(create: (_) => OrderProvider()),
         ChangeNotifierProvider<SellerService>(create: (_) => SellerService()),
         ChangeNotifierProvider<CategoryService>(
           create: (_) => CategoryService(),
@@ -43,8 +45,8 @@ class MyApp extends StatelessWidget {
 
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: false),
-        // home: LoginPage(),
-        home: HomePage(),
+        home: LoginPage(),
+
         debugShowCheckedModeBanner: false,
       ),
     );

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:techmart_admin/features/banner/presentation/screens/bannerscreen.dart';
 import 'package:techmart_admin/features/catagories/presentation/screens/catagory_screen.dart';
 import 'package:techmart_admin/features/coupons/presentation/screens/coupons_screen.dart';
+import 'package:techmart_admin/features/orders/presentation/screens/order_screen.dart';
 import 'package:techmart_admin/features/screens/brand_screen.dart';
 import 'package:techmart_admin/features/screens/dashboard_screen.dart';
 import 'package:techmart_admin/features/screens/order_screen.dart';
@@ -126,7 +127,7 @@ class _MyHomePageState extends State<HomePage> {
                 SellersPage(),
                 CatagoryScreen(),
                 BrandScreen(),
-                OrdersPage(),
+                AdminOrderScreen(),
                 CouponsScreen(),
                 BannerScreen(),
               ],
