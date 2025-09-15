@@ -17,14 +17,18 @@ class BrandService extends ChangeNotifier {
 
   Future<void> addBrand(String name, Uint8List image) async {
     try {
-      String? imageUrl = await sendImageToCloudinary(
-        image,
-      ); // Use private helper
+      String? imageUrl = await sendImageToCloudinary(image);
+      final normalizeName = name.toLowerCase();
+      final existing =
+          await brandCollection.where("name", isEqualTo: normalizeName).get();
+      if (existing.docs.isNotEmpty) {
+        throw Exception("Brand Already Exists");
+      }
       if (imageUrl != null) {
         final docRef = brandCollection.doc();
         final brandModel = BrandModel(
           brandUid: docRef.id,
-          name: name,
+          name: normalizeName,
           imageUrl: imageUrl,
         );
         await docRef.set(brandModel.toMap());
