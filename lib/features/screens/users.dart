@@ -26,12 +26,7 @@ class UsersPage extends StatelessWidget {
                 columns: const [
                   DataColumn(label: Text('Name')),
                   DataColumn(label: Text('Email')),
-                  DataColumn(
-                    label: Text(
-                      "Phone Number",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+                  DataColumn(label: Text("Phone Number")),
                 ],
                 rows:
                     users.map((user) {

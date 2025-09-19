@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:techmart_admin/features/authentication/presentation/widget/screens/login_page.dart';
+import 'package:techmart_admin/features/authentication/service/auth_service.dart';
 import 'package:techmart_admin/features/banner/provider/current_state.dart';
 import 'package:techmart_admin/features/coupons/service/coupon_service.dart';
 import 'package:techmart_admin/features/orders/provider/order_provider.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool loggedIn = AuthService.isLoggedIn();
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<OrderProvider>(create: (_) => OrderProvider()),
@@ -45,7 +47,7 @@ class MyApp extends StatelessWidget {
 
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: false),
-        home: LoginPage(),
+        home: loggedIn ? HomePage() : LoginPage(),
 
         debugShowCheckedModeBanner: false,
       ),

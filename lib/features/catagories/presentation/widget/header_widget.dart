@@ -37,13 +37,22 @@ class HeaderWidget extends StatelessWidget {
         if (name.isEmpty || image == null) {
           return custemSnakbar(context, "Pick a photo ", Colors.red);
         }
-
-        await context.read<CategoryService>().addCatagory(
-          name,
-          image,
-          catargoryVarientProvider.ctagoryVarientList,
-        );
-
+        if (catargoryVarientProvider.ctagoryVarientList.isEmpty) {
+          return custemSnakbar(
+            context,
+            "Catagoty Vaient cant be Empty",
+            Colors.red,
+          );
+        }
+        try {
+          await context.read<CategoryService>().addCatagory(
+            name,
+            image,
+            catargoryVarientProvider.ctagoryVarientList,
+          );
+        } catch (e) {
+          custemSnakbar(context, e.toString(), Colors.red);
+        }
         if (Navigator.canPop(context)) {
           ctagorynameController.clear();
           imageProvider.clearImage();

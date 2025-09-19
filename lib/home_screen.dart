@@ -1,11 +1,14 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:techmart_admin/core/widgets/custem_alert_dialog.dart';
+import 'package:techmart_admin/features/authentication/presentation/widget/screens/login_page.dart';
+import 'package:techmart_admin/features/authentication/service/auth_service.dart';
 import 'package:techmart_admin/features/banner/presentation/screens/bannerscreen.dart';
 import 'package:techmart_admin/features/catagories/presentation/screens/catagory_screen.dart';
 import 'package:techmart_admin/features/coupons/presentation/screens/coupons_screen.dart';
 import 'package:techmart_admin/features/orders/presentation/screens/order_screen.dart';
-import 'package:techmart_admin/features/screens/brand_screen.dart';
+import 'package:techmart_admin/features/brands/presentation/screens/brand_screen.dart';
 import 'package:techmart_admin/features/screens/dashboard_screen.dart';
 import 'package:techmart_admin/features/screens/order_screen.dart';
 
@@ -109,11 +112,29 @@ class _MyHomePageState extends State<HomePage> {
               SideMenuItem(
                 title: 'Banner',
                 onTap: (index, _) {
-                  sideMenu.changePage(index); // updates selected menu
-                  pageController.jumpToPage(index); // navigates to page
+                  sideMenu.changePage(index);
+                  pageController.jumpToPage(index);
                 },
 
                 icon: const Icon(Icons.local_offer_sharp),
+              ),
+              SideMenuItem(
+                title: "Log out",
+                onTap: (_, _) {
+                  custemAlertDialog(
+                    context,
+                    () {
+                      AuthService.logout();
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        (route) => false,
+                      );
+                    },
+                    "LogOut",
+                    "Are you sure you want to log out?",
+                    "Yes",
+                  );
+                },
               ),
             ],
           ),

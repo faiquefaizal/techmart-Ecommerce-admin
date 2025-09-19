@@ -16,9 +16,22 @@ class CategoryService extends ChangeNotifier {
 
   static const cloudApiSecretKey = "qHxukWJjglp4g3MpP1tPCgf2m0Q";
   Future<bool> doesCategoryExist(String name) async {
-    final snapshot =
-        await catagoryCollection.where('name', isEqualTo: name).limit(1).get();
-    return snapshot.docs.isNotEmpty;
+    final nameLower = name.toLowerCase(); // Convert input name to lowercase
+
+    try {
+      final snapshot = await catagoryCollection.get();
+
+      for (var doc in snapshot.docs) {
+        final categoryName = doc['Name'] as String;
+        if (categoryName.toLowerCase() == nameLower) {
+          return true;
+        }
+      }
+      return false;
+    } catch (e) {
+      log("Error checking category existence: $e");
+      return false;
+    }
   }
 
   Future<void> addCatagory(
@@ -27,7 +40,12 @@ class CategoryService extends ChangeNotifier {
     List<CatagoryVarient> varients,
   ) async {
     try {
+      final catagoryexist = await doesCategoryExist(name);
+      if (catagoryexist) {
+        throw Exception("Category with the name '$name' already exists!");
+      }
       String? imageurl = await sendImageToCloidinary(image);
+
       if (imageurl != null) {
         final docref = catagoryCollection.doc();
         final catagoryModel = CategoryModel(
@@ -44,6 +62,7 @@ class CategoryService extends ChangeNotifier {
       }
     } catch (e) {
       log(e.toString());
+      rethrow;
     }
   }
 

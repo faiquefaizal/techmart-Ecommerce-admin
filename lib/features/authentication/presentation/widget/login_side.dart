@@ -47,7 +47,7 @@ class loginSide extends StatelessWidget {
               const SizedBox(height: 20),
               LoginButton(
                 onPressed: () {
-                  validateLogin(
+                  AuthService.validateLogin(
                     context,
                     emailController.text.trim(),
                     passwordController.text.trim(),
