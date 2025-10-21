@@ -1,16 +1,60 @@
-# techmart_admin
 
-A new Flutter project.
+# TechMart - Admin Panel
 
-## Getting Started
+This is the central administrative panel for the TechMart e-commerce platform. It is a web app used by administrators to manage users (customers and sellers), approve new products, oversee all orders, and view platform-wide analytics.
 
-This project is a starting point for a Flutter application.
+This panel is part of a larger e-commerce ecosystem:
+* **Customer App:** https://github.com/faiquefaizal/techmart-Ecommerce-user
+* **Seller Dashboard:** https://github.com/faiquefaizal/techmart-Ecommerce-seller
+* **Admin Panel (This Repo):** https://github.com/faiquefaizal/techmart-Ecommerce-admin
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠️ Tech Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+* **Framework:** Flutter Web
+* **Language:** Dart
+* **State Management:** **Provider**
+* **Backend:** Firebase (Firestore, Authentication, Cloud Functions)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 Hosted URL
+
+* **Live Admin Panel:** https://github.com/faiquefaizal/techmart-Ecommerce-admin
+
+## ⚙️ Getting Started
+
+1.  **Clone the repo**
+    ```sh
+    git clone [https://github.com/](https://github.com/)[YOUR_USERNAME]/techmart_admin.git
+    cd techmart_admin
+    ```
+2.  **Set up Firebase**
+    * Follow the [FlutterFire CLI docs](https://firebase.google.com/docs/flutter/setup) to configure this app with your Firebase project.
+3.  **Install dependencies & run**
+    ```sh
+    flutter pub get
+    flutter run -d chrome
+    ```
+## 🛠️ Tech Stack
+
+* **Framework:** Flutter Web
+* **Language:** Dart
+* **State Management:** **Provider**
+* **Backend:** Firebase (Firestore, Authentication, Cloud Functions)
+
+## 🚀 Hosted URL
+
+* **Live Admin Panel:** https://techmart-ecommerce-admin.vercel.app/
+
+## ⚙️ Getting Started
+
+1.  **Clone the repo**
+    ```sh
+    git clone [https://github.com/](https://github.com/)[YOUR_USERNAME]/techmart_admin.git
+    cd techmart_admin
+    ```
+2.  **Set up Firebase**
+    * Follow the [FlutterFire CLI docs](https://firebase.google.com/docs/flutter/setup) to configure this app with your Firebase project.
+3.  **Install dependencies & run**
+    ```sh
+    flutter pub get
+    flutter run -d chrome
+    ```
