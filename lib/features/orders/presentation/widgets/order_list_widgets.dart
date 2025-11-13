@@ -29,10 +29,10 @@ Widget buildOrderList(BuildContext context) {
             scrollDirection: Axis.horizontal,
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                minWidth: MediaQuery.of(context).size.width - (13.0 * 2),
+                minWidth: MediaQuery.of(context).size.width,
               ),
               child: DataTable(
-                columnSpacing: 20,
+                // columnSpacing: 20,
                 columns: const [
                   DataColumn(label: Text("Order ID")),
                   DataColumn(label: Text("Customer")),

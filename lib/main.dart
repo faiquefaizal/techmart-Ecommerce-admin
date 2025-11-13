@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:techmart_admin/core/theme/app_theme.dart';
 import 'package:techmart_admin/features/authentication/presentation/widget/screens/login_page.dart';
 import 'package:techmart_admin/features/authentication/service/auth_service.dart';
 import 'package:techmart_admin/features/banner/provider/current_state.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
       ],
 
       child: MaterialApp(
-        theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: false),
+        theme: appTheme,
         home: loggedIn ? HomePage() : LoginPage(),
 
         debugShowCheckedModeBanner: false,

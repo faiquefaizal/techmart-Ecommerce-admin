@@ -130,6 +130,7 @@ class CategoryService extends ChangeNotifier {
     try {
       // Extract the public_id from the image URL
       final uri = Uri.parse(imageUrl);
+
       final pathSegments = uri.pathSegments;
       final publicId =
           pathSegments

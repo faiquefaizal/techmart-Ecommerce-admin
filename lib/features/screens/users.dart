@@ -7,7 +7,9 @@ class UsersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Users'), centerTitle: true),
+      appBar: AppBar(
+        title: Text('Users', style: Theme.of(context).textTheme.titleLarge),
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('Users').snapshots(),
         builder: (context, snapshot) {
@@ -18,30 +20,46 @@ class UsersPage extends StatelessWidget {
             return const Center(child: Text('No users found.'));
           }
           final users = snapshot.data!.docs;
-          return SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DataTable(
-                columns: const [
-                  DataColumn(label: Text('Name')),
-                  DataColumn(label: Text('Email')),
-                  DataColumn(label: Text("Phone Number")),
-                ],
-                rows:
-                    users.map((user) {
-                      final name = user['name'] ?? 'No Name';
-                      final email = user['email'] ?? 'No Email';
-                      final phone = user['phone'] ?? 'NO phone';
+          return SizedBox(
+            width: double.infinity,
+            child: Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minWidth: MediaQuery.of(context).size.width - 26,
+                    ),
+                    child: DataTable(
+                      dataTextStyle: Theme.of(context).textTheme.bodyMedium,
+                      headingTextStyle: Theme.of(context).textTheme.titleMedium,
+                      columns: const [
+                        DataColumn(label: Text('Name')),
+                        DataColumn(label: Text('Email')),
+                        DataColumn(label: Text("Phone Number")),
+                      ],
+                      rows:
+                          users.map((user) {
+                            final name = user['name'] ?? 'No Name';
+                            final email = user['email'] ?? 'No Email';
+                            final phone = user['phone'] ?? 'NO phone';
 
-                      return DataRow(
-                        cells: [
-                          DataCell(Text(name)),
-                          DataCell(Text(email)),
-                          DataCell(Text(phone)),
-                        ],
-                      );
-                    }).toList(),
+                            return DataRow(
+                              cells: [
+                                DataCell(Text(name)),
+                                DataCell(Text(email)),
+                                DataCell(Text(phone)),
+                              ],
+                            );
+                          }).toList(),
+                    ),
+                  ),
+                ),
               ),
             ),
           );

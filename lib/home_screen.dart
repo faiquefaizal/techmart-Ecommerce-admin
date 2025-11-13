@@ -9,7 +9,7 @@ import 'package:techmart_admin/features/catagories/presentation/screens/catagory
 import 'package:techmart_admin/features/coupons/presentation/screens/coupons_screen.dart';
 import 'package:techmart_admin/features/orders/presentation/screens/order_screen.dart';
 import 'package:techmart_admin/features/brands/presentation/screens/brand_screen.dart';
-import 'package:techmart_admin/features/screens/dashboard_screen.dart';
+import 'package:techmart_admin/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:techmart_admin/features/screens/order_screen.dart';
 
 import 'package:techmart_admin/features/screens/users.dart';
@@ -40,6 +40,8 @@ class _MyHomePageState extends State<HomePage> {
               selectedColor: Colors.lightBlue,
               selectedTitleTextStyle: const TextStyle(color: Colors.white),
               selectedIconColor: Colors.white,
+              unselectedTitleTextStyle: const TextStyle(color: Colors.white),
+              unselectedIconColor: Colors.white,
             ),
             title: const Padding(
               padding: EdgeInsets.all(16.0),
@@ -116,10 +118,11 @@ class _MyHomePageState extends State<HomePage> {
                   pageController.jumpToPage(index);
                 },
 
-                icon: const Icon(Icons.local_offer_sharp),
+                icon: const Icon(Icons.image_outlined),
               ),
               SideMenuItem(
                 title: "Log out",
+                icon: const Icon(Icons.logout),
                 onTap: (_, _) {
                   custemAlertDialog(
                     context,

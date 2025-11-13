@@ -7,3 +7,7 @@ String generateFirebaseId() {
   log(id.id ?? "nogentrated");
   return id.id;
 }
+
+int listSum(List<int> list) {
+  return list.fold(0, (prev, element) => prev + element);
+}
